@@ -110,10 +110,10 @@ func (g *Game) Update() error {
 		IsQ = !IsQ
 	}
 	if ebiten.IsKeyPressed(ebiten.KeyUp) {
-		diaglo += 100
+		diaglo += 10
 	}
 	if ebiten.IsKeyPressed(ebiten.KeyDown) {
-		diaglo -= 100
+		diaglo -= 10
 	}
 	if ebiten.IsKeyPressed(ebiten.KeyA) {
 		X -= 5
@@ -147,7 +147,6 @@ func (g *Game) Draw(screen *ebiten.Image) {
 	//count++
 	tihuan := [4][4]float32{}
 	angle := float64(count%360) * math.Pi / 180
-
 	//平移
 	tihuan3 := [4][4]float32{}
 	tihuan3[0][0] = 1
@@ -177,14 +176,24 @@ func (g *Game) Draw(screen *ebiten.Image) {
 
 	tihuan = Mult(tihuan, tihuan3)
 
+	//移动z轴
 	tihuan1 := [4][4]float32{}
 	tihuan1[0][0] = 1
 	tihuan1[1][1] = 1
 	tihuan1[2][2] = 1
-	// tihuan1[3][0] = 0
-	// tihuan1[3][1] = 0
+	//tihuan1[3][0] = -40
 	tihuan1[3][2] = diaglo
 	tihuan1[3][3] = 1
+	//旋转
+	// dd := 0.1
+	// tihuan11 := [4][4]float32{}
+	// tihuan11[0][0] = 1
+	// tihuan11[1][1] = float32(math.Cos(dd))
+	// tihuan11[1][2] = -float32(math.Sin(dd))
+	// tihuan11[2][1] = float32(math.Sin(dd))
+	// tihuan11[2][2] = float32(math.Cos(dd))
+	// tihuan11[3][3] = 1
+	// tihuan1 = Mult(tihuan1, tihuan11)
 
 	tihuan2 := [4][4]float32{}
 	tihuan2[0][0] = 1
